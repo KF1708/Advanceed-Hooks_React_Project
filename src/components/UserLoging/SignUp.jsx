@@ -18,13 +18,19 @@ const SignUp = () => {
   const initialValue = { UserName: "", UserEmail: "", UserPassword: "" };
 
   const fromReducer = (state, action) => {
+    //The reducer function creates a new state based on the action and the current state.
+    //A function that takes two arguments: the current state and an action. It returns the new state based on the action.
+
+    //The function uses a switch statement to decide how to handle the action based on its type.
     switch (action.type) {
       case "changeInput":
+        //The ...state spreads the existing properties of the current state into a new object.
+        // [action.field] is a dynamic key, meaning it uses the field property from the action to determine which field in the state to update.
         return {
           ...state,
           [action.field]: action.value,
         };
-      default:
+      default: /// that if the action type is not recognized, the reducer returns the current state unchanged. This prevents unintentional state mutations.
         return state;
     }
   };
@@ -34,8 +40,10 @@ const SignUp = () => {
   const handleChange = (e) => {
     // console.log("Field:", e.target.name, "Value:", e.target.value);
     dispatch({
-      type: "changeInput",
-      field: e.target.name,
+      //Use the dispatch function to trigger updates based on user input or other events.
+
+      type: "changeInput", //The action object typically contains a type property (what kind of action to perform)
+      field: e.target.name, //The other relevant data (field, value).
       value: e.target.value,
     });
   };
@@ -70,7 +78,7 @@ const SignUp = () => {
         <>
           <div className="mt-1 py-2">
             <div className="px-96 mx-40">
-              <img src="public/images/logo.png" alt="logo" className="" />
+              <img src="/images/logo.png" alt="logo" className="" />
             </div>
             <h2 className="pb-2 text-2xl font-semibold">Sign Up</h2>
             <h2 className="pb-5 font-normal">

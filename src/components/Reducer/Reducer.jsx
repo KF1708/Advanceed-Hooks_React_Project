@@ -2,13 +2,19 @@ import { useReducer } from "react";
 import useMediaQuery from "../../hooks/useMediaQuery";
 
 const fromReducer = (state, action) => {
+  //A function that takes two arguments: the current state and an action. It returns the new state based on the action.
+
+  //The function uses a switch statement to decide how to handle the action based on its type.
   switch (action.type) {
     case "changeInput":
+      //The ...state spreads the existing properties of the current state into a new object.
+      // [action.field] is a dynamic key, meaning it uses the field property from the action to determine which field in the state to update.
+
       return { ...state, [action.field]: action.value };
     case "reset":
-      return { name: "", email: "" };
+      return { name: "", email: "" }; //Resets the state to its initial state, where both name and email are empty strings.
 
-    default:
+    default: //Ensures that if the action type is not recognized, the reducer returns the current state unchanged. This prevents unintentional state mutations.
       return state;
   }
 };
@@ -24,8 +30,10 @@ const Reducer = () => {
 
   const handleChange = (e) => {
     dispatch({
-      type: "changeInput",
-      field: e.target.name,
+      //Use the dispatch function to trigger updates based on user input or other events
+
+      type: "changeInput", //The action object typically contains a type property (what kind of action to perform)
+      field: e.target.name, //The other relevant data (field, value).
       value: e.target.value,
     });
   };
